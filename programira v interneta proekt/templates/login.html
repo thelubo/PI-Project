@@ -1,0 +1,26 @@
+<!doctype html>
+<head><title>Вход</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styling.css') }}">
+    <meta charset=utf-8> 
+</head>
+<body>
+	<div class="center">
+		{% if error == 1 %}
+		<span class="span_special">
+			<h1>Грешка, моля опитайте отново</h1>
+		</span>
+		{% endif %}
+		<span style="background-color: white; padding: 2em;border: 5px black solid">
+			<form method="POST">
+				<label>Потребителско име</label><br>
+				<input type="text" name="username" maxlength="20" size="20" ><br><br>
+				<label>Парола</label><br>
+				<input type="password" name="password" maxlength="20" size="20" ><br><br>
+				<input type="submit" value="Вход"/>
+			</form>
+		<br><a href="/">
+		<button type="button" value="back" name="back_button">Назад</button>
+		</a>
+		</span>
+	</div>
+</body>

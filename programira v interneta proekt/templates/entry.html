@@ -1,0 +1,142 @@
+<!doctype html>
+<head><title>Резервация</title>	
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styling.css') }}">
+	<meta charset=utf-8> 
+	{{ toastr.include_jquery() }}
+    {{ toastr.include_toastr_css() }}
+    {{ toastr.message() }}	
+</head>
+<body>
+	<div class="center">
+		<span class="span_special">
+			<form method="POST">
+				<label>Номер на стая</label><span style="color:red">*</span><br>
+				<input type="text" name="room_number_reserve" value="{{ default_room }}" maxlength="4" size="25" ><br><br>
+				
+				<label>Ден</label><span style="color:red">*</span><br>
+					<select name="day_of_week_entry" id="day_of_week_entry">
+						<option selected="selected" value="{{ default_day_of_week_entry }}">{{ default_day_of_week_entry_label }}</option>
+						<option value=0>Понеделник</option>
+						<option value=1>Вторник</option>
+						<option value=2>Сряда</option>
+						<option value=3>Четвъртък</option>
+						<option value=4>Петък</option>
+						<option value=5>Събота</option>
+						<option value=6>Неделя</option>
+						<option value=></option>
+					</select><br><br>
+					
+				<label>Час (начало-край)</label><span style="color:red">*</span><br>
+				
+					<select name="time_start_reserve" id="time_start_reserve">
+						<option selected="selected" value="{{ default_time1 }}">{{ default_time1 }}</option>
+						<option value="07:30">07:30</option>
+						<option value="08:30">08:30</option>
+						<option value="09:30">09:30</option>
+						<option value="10:30">10:30</option>
+						<option value="11:30">11:30</option>
+						<option value="12:30">12:30</option>
+						<option value="13:45">13:45</option>
+						<option value="14:45">14:45</option>
+						<option value="15:45">15:45</option>
+						<option value="16:45">16:45</option>
+						<option value="17:45">17:45</option>
+						<option value="18:45">18:45</option>
+					</select>
+					
+					<label>-</label>
+										
+					<select name="time_end_reserve" id="time_end_reserve">
+						<option selected="selected" value="{{ default_time2 }}">{{ default_time2 }}</option>
+						<option value="08:15">08:15</option>
+						<option value="09:15">09:15</option>
+						<option value="10:15">10:15</option>
+						<option value="11:15">11:15</option>
+						<option value="12:15">12:15</option>
+						<option value="13:15">13:15</option>
+						<option value="14:30">14:30</option>
+						<option value="15:30">15:30</option>
+						<option value="16:30">16:30</option>
+						<option value="17:30">17:30</option>
+						<option value="18:30">18:30</option>
+						<option value="19:30">19:30</option>
+					</select><br><br>
+					
+				<label>Специалност</label><span style="color:red">*</span><br>
+					<input type="text" name="specialization_reserve" value="{{ default_spec_e }}" size="25" ><br><br>
+					
+				<label>Група</label><span style="color:red">*</span><br>
+					<input type="text" name="group_reserve" value="{{ default_group_e }}" size="25" maxlength="30" ><br><br>
+					
+				<label>Предмет</label><span style="color:red">*</span><br>
+					<input type="text" name="subject_reserve" value="{{ default_subj_e }}" size="25" ><br>
+					
+				<label>Вид:</label>
+				<select name="type_reserve" id="type_reserve">
+					<option selected="selected" value="{{ default_type_r_e }}">{{ default_type_r_e }}</option>
+					<option value=Л>Л</option>
+					<option value=ЛУ>ЛУ</option>
+					<option value=СУ>СУ</option>
+					<option value="Друго">Друго</option>
+				</select><br><br>
+					
+				<label>Преподавател</label><br>
+					<input type="text" name="name_reserve" value="{{ default_name_r_e }}" size="25" ><br><br>
+					
+				<input type="radio" id="multi_week_id_1" name="multi_week" value="False" checked="checked">
+					<label for="multi_week_id_1"> Само тази седмица</label><br>
+				
+				<input type="radio" id="multi_week_id_2" name="multi_week" value="multi_week_all">
+					<label for="multi_week_id_2"> До края на годината</label><br>
+				
+				<input type="radio" id="multi_week_id_3" name="multi_week" value="multi_week_specific">
+					<label for="multi_week_id_3"> От-до определена седмица</label><br>
+					
+				<select name="week_start" id="week_start">
+					<option value="{{ default_week_start }}">{{ default_week_start }}</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+					<option value=6>6</option>
+					<option value=7>7</option>
+					<option value=8>8</option>
+					<option value=9>9</option>
+					<option value=10>10</option>
+					<option value=11>11</option>
+					<option value=12>12</option>
+					<option value=13>13</option>
+				</select>
+				-
+				<select name="week_end" id="week_end">
+					<option value="{{ default_week_end }}">{{ default_week_end }}</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+					<option value=6>6</option>
+					<option value=7>7</option>
+					<option value=8>8</option>
+					<option value=9>9</option>
+					<option value=10>10</option>
+					<option value=11>11</option>
+					<option value=12>12</option>
+					<option value=13>13</option>
+				</select><br><br>
+				
+				<span style="text-align:right; display:block">
+					<span style="color:red">*</span>
+					- Задължително
+				</span>
+				
+				<button type="submit" name="reserve_button_final" value="Reserve">Резервиране</button>	
+				<a href="/">
+				<button type="button" value="back" name="back_button">Назад</button>  
+				</a>
+			</form>
+		</span>
+	</div>
+{{ toastr.include_toastr_js() }}
+</body>

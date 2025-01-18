@@ -1,0 +1,97 @@
+# import psycopg2
+# from datetime import datetime
+#
+# conn = psycopg2.connect(database="postgres2",
+#                         host="localhost",
+#                         user="postgres",
+#                         password="4head",
+#                         port="5432")
+# cur = conn.cursor()
+#
+#
+# def search(room_number, time, date=None, table=None, date_offset=None):
+#     if date is not None and table is None:
+#         sql_table = "SELECT name_table FROM week_periods WHERE '%s' BETWEEN date_start AND date_end" % date
+#         cur.execute(sql_table)
+#         results = cur.fetchone()
+#         table = results[0]
+#
+#     # print(sql_table)
+#
+#     ###############################
+#     sql = ("SELECT %s.start_time, %s.end_time, %s.day_of_week, rooms.room_number, specializations.name_specialization, "
+#            "class_groups.number_group, subjects.name_subject, subject_type.type_subject, "
+#            "lecturers.name_person, %s.id FROM " "%s ") % (table, table, table, table, table)
+#
+#     sql = sql + "JOIN rooms ON rooms.id = %s.room_id " % table
+#     sql = sql + "JOIN specializations ON specializations.id = %s.specialization_id " % table
+#     sql = sql + "JOIN class_groups ON class_groups.id = %s.group_id " % table
+#     sql = sql + "JOIN subjects ON subjects.id = %s.subject_id " % table
+#     sql = sql + "JOIN subject_type ON subject_type.id = %s.subject_type_id " % table
+#     sql = sql + "JOIN lecturers ON lecturers.id = %s.lecturer_id " % table
+#
+#     sql = sql + "WHERE room_number='%s' " % room_number
+#
+#     # print("results")
+#     # print(results[0])
+#     # print(date)
+#
+#     if date_offset is None:
+#         date_offset = get_date_offset(str(date), table)
+#         sql = sql + "AND day_of_week='%s' " % date_offset[0]
+#     else:
+#         sql = sql + "AND day_of_week='%s' " % date_offset
+#
+#     # this is fucked, I hate python
+#     if time is not ":":
+#         sql = sql + "AND '%s' BETWEEN start_time AND end_time " % time
+#
+#     sql = sql + "ORDER BY start_time"
+#
+#     # print('search sql here')
+#     # print(sql)
+#     cur.execute(sql)
+#     results = cur.fetchall()
+#
+#     full_result = []
+#     for result in results:
+#         # print(result)
+#         full_result.append(result)
+#
+#     print('full_result')
+#     print(full_result)
+#
+#     return full_result
+#
+#
+# def get_table(date):
+#     sql_table = "SELECT name_table FROM week_periods WHERE '%s' BETWEEN date_start AND date_end" % date
+#     cur.execute(sql_table)
+#     results = cur.fetchone()
+#     table = results[0]
+#
+#     return table
+#
+#
+# def get_date_offset(date2, table=None):
+#     if table is None:
+#         table = get_table(date2)
+#
+#     sql_date = "SELECT date_start FROM week_periods WHERE name_table = '%s'" % table
+#     # print(sql_date)
+#     cur.execute(sql_date)
+#     results = cur.fetchone()
+#
+#     try:
+#         result_date_object = datetime.strptime(str(results[0]), '%Y-%m-%d')
+#         # print(result_date_object)
+#
+#         date_object = datetime.strptime(date2, '%Y-%m-%d')
+#         # print(date_object)
+#
+#         date_offset = abs(result_date_object - date_object).days
+#         # print(date_offset)
+#     except ValueError:
+#         date_offset = 0
+#
+#     return date_offset, table

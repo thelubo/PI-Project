@@ -1,0 +1,5 @@
+Flask==3.0.3
+flask_login==0.6.3
+flask_toastr==0.5.8
+prettytable==3.10.0
+psycopg2==2.9.9

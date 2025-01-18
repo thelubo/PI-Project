@@ -1,0 +1,17 @@
+<!doctype html>
+<head><title>Вход</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styling.css') }}">
+    <meta charset=utf-8> 
+</head>
+    <body>
+		<div class="center">
+			<span style="background-color: white; padding: 2em;border: 5px black solid">
+			<h1>Logged in as: {{ user.name }} <br>Role: {{ role }}</h1>
+				<form method="POST">
+					<a href="/logout">
+					<button type="button" value="logout">Изход</button>
+					</a>
+				</form>
+			</span>
+		</div>
+    </body>

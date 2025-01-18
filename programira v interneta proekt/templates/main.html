@@ -1,0 +1,126 @@
+<!doctype html>
+<head><title>Учебни Зали</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styling.css') }}">
+    <meta charset=utf-8>
+    {{ toastr.include_jquery() }}
+    {{ toastr.include_toastr_css() }}
+    {{ toastr.message() }}	
+</head>
+<body>
+	<div class="center">
+		{% if coming_from_entry == 1 %}
+		<span class="span_special">
+			<h1>Успешно извършено действие: {{ action_type }}</h1>
+		</span>
+		{% endif %}
+		{% if error == 1 %}
+		<span class="span_special">
+			<h1>Непопълнено поле, или дата извън учебната година!</h1>
+		</span>
+		{% endif %}
+		<span class="span_special">
+			<h1>Информационна система за <br>заетост на учебни зали</h1>
+			<form method="POST">
+				<label>Номер на стая (или "салон", "аула")</label><br>
+				<input type="text" name="room_number" value="{{ default_room_main }}" maxlength="10" size="20" ><br><br>
+				
+				<label>Дата (Ден / Месец / Година)</label><span style="color:blue">*</span><br>
+					<input type="number" max=31 min=1 name="date_day" value="{{ default_day_main }}" maxlength="2" size="10" >
+					<label>-</label>
+					<select name="date_month" id="date_month">
+						<option selected="selected" value="{{ default_month_main }}">{{ default_month_main_label }}</option>
+						<option value=01>Януари</option>
+						<option value=02>Февруари</option>
+						<option value=03>Март</option>
+						<option value=04>Април</option>
+						<option value=05>Май</option>
+						<option value=06>Юни</option>
+						<option value=07>Юли</option>
+						<option value=08>Август</option>
+						<option value=09>Септември</option>
+						<option value=10>Октомври</option>
+						<option value=11>Ноември</option>
+						<option value=12>Декември</option>
+						<option value=></option>
+					</select>
+					<label>-</label>
+					<input type="text" name="date_year" value="{{ default_year_main }}" maxlength="4" size="10" ><br><br>
+					
+				<label>Седмица - ден</label><span style="color:blue">*</span><br>
+					<select name="week" id="week">
+						<option selected="selected" value="{{ default_week_main }}">{{ default_week_main }}</option>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
+						<option value=7>7</option>
+						<option value=8>8</option>
+						<option value=9>9</option>
+						<option value=10>10</option>
+						<option value=11>11</option>
+						<option value=12>12</option>
+						<option value=13>13</option>
+						<option value=></option>
+					</select>
+					<label>-</label>
+					<select name="day_of_week" id="day_of_week">
+						<option selected="selected" value="{{ default_day_of_week_main }}">{{ default_day_of_week_main_label }}</option>
+						<option value=0>Понеделник</option>
+						<option value=1>Вторник</option>
+						<option value=2>Сряда</option>
+						<option value=3>Четвъртък</option>
+						<option value=4>Петък</option>
+						<option value=5>Събота</option>
+						<option value=6>Неделя</option>
+						<option value=></option>
+					</select><br><br>
+					
+				<label>Час (празно за целият ден)</label><br>
+					<input type="text" name="time_hour" value="{{ default_hour_main }}" maxlength="2" size="2" >
+					<label>:</label>
+					<input type="text" name="time_minute" value="{{ default_minute_main }}" maxlength="2" size="2" ><br><br>
+					
+				<input type="radio" id="only_free" name="only_exclusive" value="only_free">
+				<label for="only_free"> Само свободни</label>
+				
+				<input type="radio" id="only_taken" name="only_exclusive" value="only_taken">
+				<label for="only_taken"> Само заети</label>
+				
+				<input type="radio" id="all" name="only_exclusive" value=False checked="checked">
+				<label for="all"> Всичко</label>
+				<br><br>
+				
+				<button type="submit" name="search_button" value="Search">Търсене</button>
+				
+				{% if login_state == 0 %}
+					<a href="/login">
+					<button type="button" value="login" name="login_button">Вход</button>
+					</a>
+				{% else %}
+					<a href="/logout">
+					<button type="button" value="logout" name="logout_button">Изход</button>
+					</a>
+				{% endif %}
+				{% if login_state == 1 %}
+					<br><br> Потребител: {{ username }}
+				{% endif %}
+				{% if admin_state == 1 %}
+					<br> <span style="color:red">Администратор</span> 
+				{% endif %}
+				
+				<br>
+				<span style="text-align:right; display:block">
+					<span style="color:blue">*</span>
+					- Поне едно
+				<br>
+				<a href="/help">
+					<button type="button" value="help" name="help_button">Помощ</button>
+				</a>
+				</span>
+			</form>
+		</span>
+	</div>
+{{ toastr.include_toastr_js() }}
+</body>

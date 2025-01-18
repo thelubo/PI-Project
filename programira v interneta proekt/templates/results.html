@@ -1,0 +1,26 @@
+<!doctype html>
+<head><title>Данни</title>	
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styling.css') }}">
+	<style>
+	h1 {
+		text-align: center;
+		font-size: 30px;
+	}
+	</style>
+	<meta charset=utf-8> 
+</head>
+<body>
+	<div class="center">
+		<span class="span_special" style="padding: 0.5em; margin-bottom: 5px;">
+			<h1> {{ query_info|safe }} </h1>
+		</span>
+		<span class="span_special">
+		<form method="POST">
+			{{ incoming_table|safe }}
+		</form>
+		<a href="/">
+			<button type="button" value="back" name="back_button">Назад</button>
+		</a>
+		</span>
+	</div>
+</body>
